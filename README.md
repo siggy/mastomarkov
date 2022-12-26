@@ -43,13 +43,10 @@ https://github.com/kivra/oauth2_client
 ```
 
 ```bash
-kerl build 25.2 25.2-libssl
-kerl install 25.2-libssl /home/sig/kerl/25.2-libssl
-
+kerl build 25.2
 
 . /home/sig/kerl/25.2/activate
-. /home/sig/kerl/25.2-libssl/activate
-
+kerl_deactivate
 
 rebar3 new app mastomarkov
 cd mastomarkov
@@ -58,6 +55,7 @@ rebar3 compile
 rebar3 hex user auth
 
 
+rebar3 compile
 rebar3 shell
 application:start(myapp).
 application:stop(myapp).
