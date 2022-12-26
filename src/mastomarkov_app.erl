@@ -10,8 +10,8 @@
 -export([start/2, stop/1]).
 
 -define(MASTODON_CLIENT_KEY, os:getenv("MASTODON_CLIENT_KEY")).
--define(MASTODON_CLIENT_SECRET,os:getenv("MASTODON_CLIENT_SECRET")).
--define(MASTODON_ACCESS_TOKEN,os:getenv("MASTODON_ACCESS_TOKEN")).
+-define(MASTODON_CLIENT_SECRET, os:getenv("MASTODON_CLIENT_SECRET")).
+-define(MASTODON_ACCESS_TOKEN, os:getenv("MASTODON_ACCESS_TOKEN")).
 
 -define(OAUTH2_TOKEN_URL, <<"https://hachyderm.io/oauth2/token">>).
 
@@ -21,10 +21,18 @@ start(_StartType, _StartArgs) ->
     application:ensure_all_started(oauth2c),
     application:ensure_all_started(ssl),
 
-    % {ok, _Headers, Client} =
-    %     oauth2c:retrieve_access_token(
-    %       <<"client_credentials">>, ?OAUTH2_TOKEN_URL, ?CONSUMER_KEY,
-    %       ?CONSUMER_SECRET),
+    % Id = <<"?MASTODON_CLIENT_KEY">>,
+    % Secret = <<"?MASTODON_CLIENT_SECRET">>,
+    % Auth = base64:encode(<<Id/binary, ":", Secret/binary>>),
+    % io:fwrite(Auth),
+
+    {ok, _Headers, Client} =
+        oauth2c:retrieve_access_token(
+          <<"client_credentials">>, <<"?OAUTH2_TOKEN_URL">>, <<"?MASTODON_CLIENT_KEY">>,
+          <<"?MASTODON_CLIENT_SECRET">>),
+    io:fwrite(ok),
+    io:fwrite(_Headers),
+    io:fwrite(Client),
     % {{ok, _Status1, _Headers1, Tweets}, Client2} =
     %     oauth2c:request(
     %       get, json, ?USER_TIMELINE_URL("twitterapi", "4"), [200], Client),
