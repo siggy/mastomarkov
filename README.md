@@ -26,20 +26,11 @@ https://medium.com/erlang-central/building-your-first-erlang-app-using-rebar3-25
 ```bash
 sudo apt-get install libncurses5-dev libncursesw5-dev
 
-
 wget https://erlang.org/download/otp_src_R16B03-1.tar.gz
 tar xvfz https://erlang.org/download/otp_src_R16B03-1.tar.gz
 cd otp_src_R16B03-1
 
 ./configure && make && make install
-```
-
-```bash
-
-
-https://github.com/kivra/oauth2_client
-
-
 ```
 
 ```bash
@@ -54,10 +45,13 @@ rebar3 compile
 
 rebar3 hex user auth
 
-
 rebar3 compile
 rebar3 shell
 application:start(myapp).
 application:stop(myapp).
-
 ```
+
+# TODO
+
+- read the latest post from a specific account, post it back in a new post
+- markov
